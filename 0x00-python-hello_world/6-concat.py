@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 str1 = "Holberton"
 str2 = "School"
-str_list = [str1, str2]
-print(f"Welcome to "+" ".join(str_list) +"!")
+str2_spce_added = " " + str2
+print(f"Welcome to {str1}{str2_spce_added}!")
