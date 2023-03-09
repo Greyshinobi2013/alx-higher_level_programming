@@ -1,1 +1,2 @@
-print("Best School")
+#!/bin/bash
+python $PYFILE
