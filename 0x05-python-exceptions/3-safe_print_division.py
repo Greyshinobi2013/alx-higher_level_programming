@@ -4,8 +4,8 @@ def safe_print_division(a, b):
     try:
         result = a / b
     except ZeroDivisionError:
-        //print("Error: Division by 0 is not allowed.")
-        pass
+        print("Can't divide by zero!")
     finally:
         print("Inside result: {}".format(result))
         return result
+
