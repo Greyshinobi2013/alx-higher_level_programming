@@ -5,12 +5,15 @@
  * print_python_list - Prints basic info about Python lists.
  * @p: A PyObject list object.
  *
+ * This function takes a PyObject list object as an argument and prints basic
+ * information about the list. If the object is not a valid PyListObject, it
+ * prints an error message.
+ *
  * Return: Nothing.
  */
 void print_python_list(PyObject *p)
 {
 	long int size, i;
-	PyListObject *list;
 	PyObject *item;
 
 	printf("[*] Python list info\n");
@@ -20,15 +23,13 @@ void print_python_list(PyObject *p)
 		return;
 	}
 
-	list = (PyListObject *)p;
-	size = Py_SIZE(p);
+	size = ((PyVarObject *)p)->ob_size;
 
 	printf("[*] Size of the Python List = %ld\n", size);
-	printf("[*] Allocated = %ld\n", list->allocated);
 	for (i = 0; i < size; i++)
 	{
-		item = PyList_GET_ITEM(p, i);
-		printf("Element %ld: %s\n", i, Py_TYPE(item)->tp_name);
+		item = (*(PyObject **)(p + i));
+		printf("Element %ld: %s\n", i, item->ob_type->tp_name);
 	}
 }
 
@@ -36,12 +37,15 @@ void print_python_list(PyObject *p)
  * print_python_bytes - Prints basic info about Python bytes.
  * @p: A PyObject bytes object.
  *
+ * This function takes a PyObject bytes object as an argument and prints basic
+ * information about the bytes. It prints a maximum of 10 bytes. If the object
+ * is not a valid PyBytesObject, it prints an error message.
+ *
  * Return: Nothing.
  */
 void print_python_bytes(PyObject *p)
 {
-	PyBytesObject *bytes;
-	unsigned char *str;
+	char *str;
 	long int size, i;
 
 	printf("[*] Python bytes\n");
@@ -51,9 +55,8 @@ void print_python_bytes(PyObject *p)
 		return;
 	}
 
-	bytes = (PyBytesObject *)p;
-	str = bytes->ob_sval;
-	size = Py_SIZE(p);
+	str = ((PyBytesObject *)p)->ob_sval;
+	size = ((PyVarObject *)p)->ob_size;
 
 	printf("  Size of the Python Bytes = %ld\n", size);
 	printf("  Trying string: %s\n", str);
@@ -71,6 +74,10 @@ void print_python_bytes(PyObject *p)
  * print_python_float - Prints basic info about Python float objects.
  * @p: A PyObject float object.
  *
+ * This function takes a PyObject float object as an argument and prints basic
+ * information about the float. If the object is not a valid PyFloatObject, it
+ * prints an error message.
+ *
  * Return: Nothing.
  */
 void print_python_float(PyObject *p)
@@ -80,10 +87,11 @@ void print_python_float(PyObject *p)
 	printf("[*] Python float\n");
 	if (!PyFloat_Check(p))
 	{
-		printf("  [ERROR] Invalid Float Object\n");
-		return;
+	printf("  [ERROR] Invalid Float Object\n");
+	return;
 	}
 
 	value = ((PyFloatObject *)p)->ob_fval;
-	printf("  value: %s\n", PyOS_double_to_string(value, 'r', 0, Py_DTSF_ADD_DOT_0, NULL));
+	printf("  value: %s\n", PyOS_double_to_string(value, 'r', 0,
+	Py_DTSF_ADD_DOT_0, NULL));
 }
