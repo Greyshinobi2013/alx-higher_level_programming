@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 
 # Print the specified message to stderr
