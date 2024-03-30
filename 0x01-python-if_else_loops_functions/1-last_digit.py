@@ -11,3 +11,5 @@ if number >= 0:
         print(f"Last digit of {number} is {lst_num} and is 0")
 if number < 0:
     print(f"Last digit of {number} is -{lst_num} and is less than 6 and not 0")
+else:
+    print("TypeError")
