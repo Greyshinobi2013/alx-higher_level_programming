@@ -67,7 +67,7 @@ void print_python_bytes(PyObject *p)
 		if (i < 9 && i < size)
 			printf(" ");
 	}
-	//printf("\n");
+	printf("\n");
 }
 
 /**
