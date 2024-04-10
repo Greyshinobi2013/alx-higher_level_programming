@@ -1,4 +1,4 @@
 #!/usr/bin/python3
 class Rectangle:
-    '''Rectangle class created'''
+    """Empty Rectangle class"""
     pass
