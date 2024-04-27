@@ -1,5 +1,18 @@
 #!/usr/bin/python3
-"""Empyt Square class"""
+
+"""
+
+
+Square class that doesn't have any function or variable
+
+
+"""
+
+
 class Square:
-    """Empty square class"""
+    """
+
+    No variable nor function
+
+    """
     pass
