@@ -10,6 +10,9 @@ Contains:
 
 
 class Square:
+    """
+    Square class that validates a private attribute size
+    """
 
     def __init__(self, size=0):
         """
